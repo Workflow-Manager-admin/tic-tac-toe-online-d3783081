@@ -1,104 +1,212 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --kavia-primary: #1976D2;
+  --kavia-secondary: #424242;
+  --kavia-accent: #FFC107;
+  --ttt-bg: #ffffff;
+  --ttt-bg2: #f5f6fb;
+  --ttt-dark: #181825;
+  --ttt-txt: #262633;
+  --ttt-txt-light: #888;
+  --ttt-border: #e1e1ea;
+  --ttt-btn-shadow: rgba(0,0,0,0.07);
 }
-
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --ttt-bg: #12141d;
+  --ttt-bg2: #202231;
+  --ttt-dark: #f0f1ff;
+  --ttt-txt: #fafaff;
+  --ttt-txt-light: #ceced9;
+  --ttt-border: #353550;
 }
 
+body {
+  background: var(--ttt-bg);
+}
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--ttt-bg);
+  color: var(--ttt-txt);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color .3s, color .3s;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+  background: var(--ttt-bg);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  transition: 0.3s background;
+  padding: 0 12px;
 }
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+@media (max-width: 600px) {
+  .App-header {
+    padding: 0 3px;
+  }
 }
 
 .theme-toggle {
   position: absolute;
-  top: 20px;
+  top: 16px;
   right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+  background: var(--kavia-primary);
+  color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 9px 18px;
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: box-shadow .2s, background .2s;
+  box-shadow: 0 2px 8px var(--ttt-btn-shadow);
 }
-
 .theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  background: var(--kavia-secondary);
+  color: #fff;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  gap: 0;
+  background: var(--ttt-bg2);
+  border-radius: 15px;
+  border: 3px solid var(--kavia-primary);
+  box-shadow: 0 2px 12px var(--ttt-btn-shadow);
+  margin: 24px 0 12px 0;
+  overflow: hidden;
+  width: fit-content;
+}
+@media (max-width: 430px) {
+  .ttt-board {
+    grid-template-columns: repeat(3, 20vw);
+    grid-template-rows: repeat(3, 20vw);
+    min-width: 0;
+    max-width: 100vw;
+  }
+}
+.ttt-square {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border: 1px solid var(--ttt-border);
+  font-size: 2.3rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--kavia-primary);
+  outline: none;
+  transition: background .2s, color .2s;
+  box-shadow: none;
+  user-select: none;
+}
+.ttt-square:focus {
+  background: var(--kavia-accent);
+  opacity: 0.86;
+}
+.ttt-square:disabled {
+  opacity: 0.68;
+  cursor: not-allowed;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ttt-controls {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ttt-mode {
+  display: flex;
+  gap: 10px;
+}
+.ttt-btn {
+  background: var(--kavia-secondary);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 17px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-right: 3px;
+  margin-bottom: 2px;
+  font-weight: 500;
+  transition: background .2s, transform .12s;
+  box-shadow: 0 1.5px 8px var(--ttt-btn-shadow);
+}
+.ttt-btn-active, .ttt-btn:active {
+  background: var(--kavia-primary) !important;
+  color: #fff !important;
+  transform: translateY(-1.5px) scale(1.04);
+}
+.ttt-btn:hover:not(:disabled) {
+  background: var(--kavia-primary);
+  color: #fff;
+}
+.ttt-btn-reset {
+  background: var(--kavia-accent)!important;
+  color: #222!important;
+  font-weight: 600;
+  margin-left: 14px;
+  box-shadow: 0 2.5px 12px var(--ttt-btn-shadow);
+}
+.ttt-btn-reset:hover {
+  background: #ffe082!important;
+  color: #111!important;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+.ttt-scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin: 16px 0 0 0;
+  width: 100vw;
+  max-width: 370px;
+}
+@media (max-width: 500px) {
+  .ttt-scoreboard {
+    gap: 9px;
+    font-size: .96em;
   }
 }
+.ttt-score {
+  padding: 6px 15px;
+  border-radius: 9px;
+  font-size: 1.07em;
+  background: var(--ttt-bg2);
+  margin-right: 1.5px;
+  box-shadow: 0 0.7px 4.5px var(--ttt-btn-shadow);
+}
+.ttt-score-x {
+  color: var(--kavia-primary);
+  border-bottom: 2.5px solid var(--kavia-primary);
+  background: #d7e5fa;
+}
+.ttt-score-o {
+  color: var(--kavia-accent);
+  border-bottom: 2.5px solid var(--kavia-accent);
+  background: #fff5da;
+}
+.ttt-score-tie {
+  color: var(--kavia-secondary);
+  border-bottom: 2.5px solid var(--kavia-secondary);
+  background: #ececec;
+}
+
+.ttt-status {
+  min-height: 38px;
+  margin: 14px 0 0 0;
+  letter-spacing: 0.03em;
+}
+@media (max-width: 600px) {
+  .ttt-board, .ttt-scoreboard { max-width: 99vw; }
+  .App-header { padding: 0 2vw; }
+  .ttt-square { font-size: 7vw; width: 16vw; height: 16vw; }
+}
+
+footer {
+  font-family: inherit;
+  font-size: 15px;
+}
+
+::-webkit-scrollbar { display:none; }
